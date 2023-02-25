@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div
-      className="fixed w-2/12 h-full flex flex-col items-center gap-8 bg-amber-200"
+      className="w-2/12 h-screen flex flex-col items-center gap-8 bg-amber-200"
       style={{ minWidth: "5rem" }}
     >
       <div className="m-8 lg:text-6xl md:text-3xl sm:text-xl">Y(icon)?</div>

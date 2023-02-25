@@ -1,7 +1,13 @@
+import Stories from "./Stories";
+import Post from "./Post";
+import ProfileAuth from "./ProfileAuth";
+
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="">
+      <Stories />
+      <ProfileAuth />
+      <Post />
     </div>
   );
 };

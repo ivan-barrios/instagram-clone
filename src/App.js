@@ -4,7 +4,7 @@ import Home from "./components/Home";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter className="flex">
       <div className="flex">
         <Navbar />
         <Routes>
