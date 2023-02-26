@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   let links = [
-    { link: "/", iconName: "home-outline" },
-    { link: "/search", iconName: "search-outline" },
-    { link: "/explore", iconName: "compass-outline" },
-    { link: "/create", iconName: "add-circle-outline" },
-    { link: "/profile", iconName: "person-outline" },
+    { name: "Home", link: "/", iconName: "home-outline" },
+    { name: "Search", link: "/search", iconName: "search-outline" },
+    { name: "Explore", link: "/explore", iconName: "compass-outline" },
+    { name: "Create", link: "/create", iconName: "add-circle-outline" },
+    { name: "Profile", link: "/profile", iconName: "person-outline" },
   ];
 
   return (
@@ -23,6 +23,7 @@ const Navbar = () => {
           className="text-xl w-full pt-2 pb-2 text-center hover:bg-amber-300"
         >
           <ion-icon size="large" name={link.iconName} />
+          <p className="text-zero md:text-[20px]">{link.name}</p>
         </Link>
       ))}
     </nav>
