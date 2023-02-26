@@ -6,7 +6,7 @@ const Home = ({ loggedIn, setLoggedIn }) => {
   return (
     <div className="flex w-full justify-center">
       <div className="flex gap-4">
-        <div className=" flex flex-col" style={{ width: "470px" }}>
+        <div className=" flex flex-col" style={{ width: "460px" }}>
           <Stories />
           <Post />
         </div>

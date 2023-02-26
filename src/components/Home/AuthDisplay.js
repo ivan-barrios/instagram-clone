@@ -1,4 +1,4 @@
-import { auth, googleProvider } from "../../firebase-config";
+import { auth, googleProvider } from "../firebase/config";
 import { signInWithPopup, signOut } from "firebase/auth";
 
 //Display if not logged in
