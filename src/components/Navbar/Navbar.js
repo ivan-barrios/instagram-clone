@@ -1,8 +1,17 @@
-import { auth } from "../../firebase-config";
+import { auth, googleProvider } from "../../firebase-config";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ loggedIn, setLoggedIn }) => {
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      setLoggedIn(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const logOut = async () => {
     try {
       await signOut(auth);
@@ -50,12 +59,21 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
           <p className="hidden md:block">{link.name}</p>
         </Link>
       ))}
-      <div
-        className="flex w-full cursor-pointer items-center justify-center p-2 text-[24px] hover:bg-amber-300 md:hidden"
-        onClick={logOut}
-      >
-        <ion-icon size="large" name="log-out-outline"></ion-icon>
-      </div>
+      {loggedIn ? (
+        <div
+          className="flex w-full cursor-pointer items-center justify-center p-2 hover:bg-amber-300 md:hidden"
+          onClick={logOut}
+        >
+          <ion-icon size="large" name="log-out-outline"></ion-icon>
+        </div>
+      ) : (
+        <div
+          className="flex w-full cursor-pointer items-center justify-center p-2 hover:bg-amber-300"
+          onClick={signInWithGoogle}
+        >
+          <ion-icon size="large" name="log-in-outline" />
+        </div>
+      )}
     </nav>
   );
 };
