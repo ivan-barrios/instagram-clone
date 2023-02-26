@@ -1,43 +1,31 @@
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  let links = [
+    { link: "/", iconName: "home-outline" },
+    { link: "/search", iconName: "search-outline" },
+    { link: "/explore", iconName: "compass-outline" },
+    { link: "/create", iconName: "add-circle-outline" },
+    { link: "/profile", iconName: "person-outline" },
+  ];
+
   return (
-    <div
-      className="w-2/12 h-screen flex flex-col items-center gap-8 bg-amber-200"
-      style={{ minWidth: "5rem" }}
-    >
-      <div className="m-8 lg:text-6xl md:text-3xl sm:text-xl">Y(icon)?</div>
-      <Link to="/" className="w-full pt-2 pb-2 hover:bg-amber-300 text-center">
-        Home
-      </Link>
-      <Link
-        to="/search"
-        className="w-full pt-2 pb-2 hover:bg-amber-300 text-center"
-      >
-        Search
-      </Link>
-      <Link className="w-full pt-2 pb-2 hover:bg-amber-300 text-center">
-        Explore
-      </Link>
-      <Link className="w-full pt-2 pb-2 hover:bg-amber-300 text-center">
-        Reels
-      </Link>
-      <Link className="w-full pt-2 pb-2 hover:bg-amber-300 text-center">
-        Messages
-      </Link>
-      <Link
-        to="/create"
-        className="w-full pt-2 pb-2 hover:bg-amber-300 text-center"
-      >
-        Create
-      </Link>
-      <Link
-        to="/profile"
-        className="w-full pt-2 pb-2 hover:bg-amber-300 text-center"
-      >
-        Profile
-      </Link>
-    </div>
+    <nav className="fixed bottom-0 flex h-fit w-full items-center justify-center gap-2 bg-amber-200 md:sticky md:top-0 md:h-screen md:w-2/12 md:flex-col md:gap-8">
+      <div className="absolute cursor-pointer text-transparent md:top-12 md:text-black">
+        <Link to="/">
+          <ion-icon size="large" name="logo-instagram"></ion-icon>
+        </Link>
+      </div>
+      {links.map((link, index) => (
+        <Link
+          key={index}
+          to={link.link}
+          className="text-xl w-full pt-2 pb-2 text-center hover:bg-amber-300"
+        >
+          <ion-icon size="large" name={link.iconName} />
+        </Link>
+      ))}
+    </nav>
   );
 };
 

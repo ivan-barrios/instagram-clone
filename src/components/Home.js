@@ -1,13 +1,13 @@
 import Stories from "./Stories";
 import Post from "./Post";
-import ProfileAuth from "./ProfileAuth";
 
 const Home = () => {
   return (
-    <div className="">
-      <Stories />
-      <ProfileAuth />
-      <Post />
+    <div className="flex w-full justify-center bg-green-500">
+      <div className=" flex flex-col bg-red-500" style={{ width: "470px" }}>
+        <Stories />
+        <Post />
+      </div>
     </div>
   );
 };

@@ -4,8 +4,8 @@ import Home from "./components/Home";
 
 const App = () => {
   return (
-    <BrowserRouter className="flex">
-      <div className="flex">
+    <BrowserRouter>
+      <div className="flex flex-col md:flex-row">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
