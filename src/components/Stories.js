@@ -11,7 +11,7 @@ const Story = () => {
 
 const Stories = () => {
   return (
-    <div className="mt-4 grid h-fit w-full grid-cols-6 gap-12 overflow-scroll bg-slate-400 text-white sm:overflow-hidden">
+    <div className="mt-4 mb-4 grid h-fit w-full grid-cols-6 gap-12 overflow-scroll bg-slate-400 text-white sm:overflow-hidden">
       <Story />
       <Story />
       <Story />

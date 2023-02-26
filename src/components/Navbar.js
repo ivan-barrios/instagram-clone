@@ -23,7 +23,7 @@ const Navbar = () => {
           className="text-xl w-full pt-2 pb-2 text-center hover:bg-amber-300"
         >
           <ion-icon size="large" name={link.iconName} />
-          <p className="text-zero md:text-[20px]">{link.name}</p>
+          <p className="hidden md:block">{link.name}</p>
         </Link>
       ))}
     </nav>
