@@ -2,7 +2,7 @@ import Stories from "./Stories";
 import Post from "./Post";
 import AuthDisplay from "./AuthDisplay";
 
-const Home = () => {
+const Home = ({ loggedIn, setLoggedIn }) => {
   return (
     <div className="flex w-full justify-center">
       <div className="flex gap-4">
@@ -10,7 +10,7 @@ const Home = () => {
           <Stories />
           <Post />
         </div>
-        <AuthDisplay />
+        <AuthDisplay loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       </div>
     </div>
   );

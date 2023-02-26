@@ -1,7 +1,5 @@
 import { auth, googleProvider } from "../../firebase-config";
 import { signInWithPopup, signOut } from "firebase/auth";
-import { async } from "@firebase/util";
-import { useState } from "react";
 
 //Display if not logged in
 const NotLoggedIn = ({ setLoggedIn }) => {
@@ -17,7 +15,7 @@ const NotLoggedIn = ({ setLoggedIn }) => {
   return (
     <div className="mt-4 hidden rounded-lg bg-amber-200 p-2 md:block">
       <div
-        className="flex cursor-pointer items-center  p-2 text-[24px] hover:bg-amber-300"
+        className="flex cursor-pointer items-center rounded-lg  p-2 text-[24px] hover:bg-amber-300"
         onClick={signInWithGoogle}
       >
         <ion-icon name="log-in-outline" />
@@ -61,9 +59,7 @@ const LoggedIn = ({ setLoggedIn }) => {
   );
 };
 
-const AuthDisplay = () => {
-  const [loggedIn, setLoggedIn] = useState(auth.currentUser !== null);
-
+const AuthDisplay = ({ loggedIn, setLoggedIn }) => {
   return (
     <div>
       {loggedIn ? (
