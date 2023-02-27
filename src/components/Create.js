@@ -27,22 +27,34 @@ const Create = ({ userID, posts, setPosts }) => {
   };
 
   return (
-    <div>
-      <input
-        type="file"
-        onChange={(e) => {
-          setImageUpload(e.target.files[0]);
-        }}
-      />
-      <button
-        id={userID}
-        onClick={() => {
-          uploadImage();
-          updatePostsQuantity(userID);
-        }}
-      >
-        Upload
-      </button>
+    <div className="flex w-full justify-center">
+      <div className="mt-4 flex w-[470px] flex-col items-center gap-4 rounded-lg bg-amber-200 p-4">
+        <div className=" text-[30px]">Add a new Post to your Profile!</div>
+        <input
+          className="hidden"
+          type="file"
+          id="file-input"
+          onChange={(e) => {
+            setImageUpload(e.target.files[0]);
+          }}
+        />
+        <label
+          className="cursor-pointer rounded-lg bg-blue-700 p-3 text-white hover:bg-blue-800"
+          htmlFor="file-input"
+        >
+          Choose a file
+        </label>
+        <button
+          className="rounded-lg bg-amber-300 py-2 px-4 hover:bg-amber-400"
+          id={userID}
+          onClick={() => {
+            uploadImage();
+            updatePostsQuantity(userID);
+          }}
+        >
+          Upload
+        </button>
+      </div>
     </div>
   );
 };
