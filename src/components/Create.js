@@ -19,9 +19,11 @@ const Create = ({ loggedIn, userID, posts, setPosts }) => {
     uploadBytes(imageRef, imageUpload).then(() => {
       console.log("Image Uploaded");
     });
+    setImageUpload(null);
   };
 
   const updatePostsQuantity = async (userID) => {
+    if (imageUpload == null) return;
     const userDoc = await doc(db, "users", userID);
     await updateDoc(userDoc, { Posts: posts + 1 });
     setPosts(posts + 1);
