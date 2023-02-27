@@ -1,17 +1,7 @@
-import { auth, googleProvider } from "../firebase/config";
-import { signInWithPopup, signOut } from "firebase/auth";
+import { auth } from "../firebase/config";
 
 //Display if not logged in
-const NotLoggedIn = ({ setLoggedIn }) => {
-  const signInWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-      setLoggedIn(true);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+const NotLoggedIn = ({ signInWithGoogle }) => {
   return (
     <div className="mt-4 hidden rounded-lg bg-amber-200 p-2 md:block">
       <div
@@ -27,16 +17,7 @@ const NotLoggedIn = ({ setLoggedIn }) => {
 };
 
 //Display if logged in
-const LoggedIn = ({ setLoggedIn }) => {
-  const logOut = async () => {
-    try {
-      await signOut(auth);
-      setLoggedIn(false);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+const LoggedIn = ({ logOut }) => {
   return (
     <div className="mt-4 hidden flex-col gap-4 rounded-lg bg-amber-200 p-2 md:flex">
       <div className="flex flex-wrap items-center gap-4">
@@ -59,13 +40,13 @@ const LoggedIn = ({ setLoggedIn }) => {
   );
 };
 
-const AuthDisplay = ({ loggedIn, setLoggedIn }) => {
+const AuthDisplay = ({ loggedIn, setLoggedIn, signInWithGoogle, logOut }) => {
   return (
     <div>
       {loggedIn ? (
-        <LoggedIn setLoggedIn={setLoggedIn} />
+        <LoggedIn logOut={logOut} />
       ) : (
-        <NotLoggedIn setLoggedIn={setLoggedIn} />
+        <NotLoggedIn signInWithGoogle={signInWithGoogle} />
       )}
     </div>
   );

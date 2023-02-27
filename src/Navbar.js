@@ -1,26 +1,7 @@
-import { auth, googleProvider } from "./components/firebase/config";
-import { signInWithPopup, signOut } from "firebase/auth";
+import { auth } from "./components/firebase/config";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ loggedIn, setLoggedIn }) => {
-  const signInWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-      setLoggedIn(true);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const logOut = async () => {
-    try {
-      await signOut(auth);
-      setLoggedIn(false);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+const Navbar = ({ loggedIn, signInWithGoogle, logOut }) => {
   let links = [
     { name: "Home", link: "/", iconName: "home-outline" },
     { name: "Search", link: "/search", iconName: "search-outline" },

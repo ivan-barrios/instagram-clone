@@ -7,6 +7,7 @@ import { useState } from "react";
 //To create a new post in personal profile
 const Create = () => {
   const [imageUpload, setImageUpload] = useState(null);
+
   const uploadImage = () => {
     if (imageUpload == null) return;
     const imageRef = ref(

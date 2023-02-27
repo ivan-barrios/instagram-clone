@@ -1,5 +1,4 @@
-import { auth, storage } from "./firebase/config";
-import { db } from "./firebase/config";
+import { auth, storage, db } from "./firebase/config";
 import { getDocs, collection } from "firebase/firestore";
 import { listAll, ref, getDownloadURL } from "firebase/storage";
 import { Link } from "react-router-dom";
@@ -9,6 +8,7 @@ const Profile = ({ loggedIn }) => {
   const [mainInfo, setMainInfo] = useState();
   const [loaded, setLoaded] = useState(false);
   const [imageList, setImageList] = useState([]);
+  const [showPostOptions, setShowPostOptions] = useState(false);
 
   //Use Effect for the user data
   const userInfoCollection = collection(db, "users");
@@ -48,6 +48,10 @@ const Profile = ({ loggedIn }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const deletePost = async () => {
+    //How to delete storage?
+  };
+
   return (
     <div className="flex h-screen w-full justify-center">
       {loggedIn ? (
@@ -77,10 +81,11 @@ const Profile = ({ loggedIn }) => {
           <div className="mt-4 mb-16 grid w-[470px] grid-cols-3 gap-2 rounded-xl bg-amber-200 p-4">
             {imageList.map((url, index) => (
               <img
-                className="w-full rounded-xl"
+                className="w-full cursor-pointer rounded-xl"
                 key={index}
                 src={url}
                 alt="post"
+                onClick={() => setShowPostOptions(!showPostOptions)}
               />
             ))}
           </div>
@@ -96,6 +101,20 @@ const Profile = ({ loggedIn }) => {
           </Link>
         </div>
       )}
+      {showPostOptions ? (
+        <div
+          onClick={() => setShowPostOptions(!showPostOptions)}
+          className="absolute top-0 left-0 flex h-full w-full flex-col items-center bg-black bg-opacity-70 pt-12"
+        >
+          <div className="text-[50px] text-white">OPTIONS:</div>
+          <button
+            onClick={deletePost}
+            className="w-fit rounded-xl bg-red-500 text-[30px] hover:bg-red-600"
+          >
+            DELETE
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 };
