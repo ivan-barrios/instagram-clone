@@ -23,7 +23,7 @@ const Profile = ({ loggedIn }) => {
             id: doc.id,
           }));
           const profileData = filteredData.find(
-            (data) => data.username === auth.currentUser.email
+            (data) => data.email === auth.currentUser.email
           );
           setMainInfo(profileData);
           setLoaded(true);
