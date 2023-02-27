@@ -1,11 +1,12 @@
-import { auth } from "./firebase/config";
+import { auth, db } from "./firebase/config";
 import { storage } from "./firebase/config";
+import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { useState } from "react";
 
 //To create a new post in personal profile
-const Create = () => {
+const Create = ({ userID, posts, setPosts }) => {
   const [imageUpload, setImageUpload] = useState(null);
 
   const uploadImage = () => {
@@ -19,6 +20,12 @@ const Create = () => {
     });
   };
 
+  const updatePostsQuantity = async (userID) => {
+    const userDoc = doc(db, "users", userID);
+    await updateDoc(userDoc, { Posts: posts + 1 });
+    setPosts(posts + 1);
+  };
+
   return (
     <div>
       <input
@@ -27,7 +34,15 @@ const Create = () => {
           setImageUpload(e.target.files[0]);
         }}
       />
-      <button onClick={uploadImage}>Upload</button>
+      <button
+        id={userID}
+        onClick={() => {
+          uploadImage();
+          updatePostsQuantity(userID);
+        }}
+      >
+        Upload
+      </button>
     </div>
   );
 };

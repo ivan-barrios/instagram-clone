@@ -10,6 +10,8 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(auth.currentUser !== null);
+  const [userID, setUserID] = useState("");
+  const [posts, setPosts] = useState();
 
   //Log In with google
   const signInWithGoogle = async () => {
@@ -33,6 +35,8 @@ const App = () => {
           Posts: 0,
         });
       }
+      setUserID(profileData.id);
+      setPosts(profileData.Posts);
       setLoggedIn(true);
     } catch (err) {
       console.error(err);
@@ -58,7 +62,12 @@ const App = () => {
           logOut={logOut}
         />
         <Routes>
-          <Route path="/create" element={<Create />} />
+          <Route
+            path="/create"
+            element={
+              <Create userID={userID} posts={posts} setPosts={setPosts} />
+            }
+          />
           <Route path="/profile" element={<Profile loggedIn={loggedIn} />} />
           <Route
             path="/"
