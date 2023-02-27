@@ -65,7 +65,12 @@ const App = () => {
           <Route
             path="/create"
             element={
-              <Create userID={userID} posts={posts} setPosts={setPosts} />
+              <Create
+                loggedIn={loggedIn}
+                userID={userID}
+                posts={posts}
+                setPosts={setPosts}
+              />
             }
           />
           <Route path="/profile" element={<Profile loggedIn={loggedIn} />} />

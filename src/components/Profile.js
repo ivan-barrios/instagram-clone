@@ -34,10 +34,11 @@ const Profile = ({ loggedIn }) => {
       getUserInfo();
     } else return;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loaded]);
+  }, [loggedIn]);
 
   const imageListRef = ref(storage, `images/${auth?.currentUser?.email}`);
   useEffect(() => {
+    setImageList([]);
     listAll(imageListRef).then((response) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
@@ -46,7 +47,7 @@ const Profile = ({ loggedIn }) => {
       });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loggedIn]);
 
   const deletePost = async () => {
     //How to delete storage?
@@ -91,14 +92,9 @@ const Profile = ({ loggedIn }) => {
           </div>
         </div>
       ) : (
-        <div className="mt-10 flex h-fit w-[470px] flex-col items-center gap-4 bg-amber-200">
-          <div className="text-[25px]">First you need to Log In</div>
-          <Link
-            className="rounded-lg p-2 text-[30px] hover:bg-amber-300"
-            to="/"
-          >
-            Back
-          </Link>
+        <div className="mt-4 flex w-[470px] flex-col items-center gap-4 rounded-lg bg-amber-200 p-4 text-[30px]">
+          <div>You need to log in first!</div>
+          <Link to="/">Back</Link>
         </div>
       )}
       {showPostOptions ? (
