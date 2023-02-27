@@ -1,17 +1,25 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { auth, db, googleProvider } from "./components/firebase/config";
+import {
+  auth,
+  db,
+  googleProvider,
+  storage,
+} from "./components/firebase/config";
 import { signInWithPopup, signOut } from "firebase/auth";
-import { useState } from "react";
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import { v4 } from "uuid";
 import Navbar from "./Navbar";
 import Home from "./components/Home/Home";
 import Create from "./components/Create";
 import Profile from "./components/Profile";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import UserProfile from "./components/UserProfile";
+import { useState } from "react";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(auth.currentUser !== null);
   const [userID, setUserID] = useState("");
   const [posts, setPosts] = useState();
+  const [clickedEmail, setClickedEmail] = useState();
 
   //Log In with google
   const signInWithGoogle = async () => {
@@ -27,17 +35,24 @@ const App = () => {
         (data) => data.email === auth.currentUser.email
       );
       if (!profileData) {
+        const id = v4();
         //Then add new doc
         await addDoc(usersCollection, {
           email: auth.currentUser.email,
           Followers: 0,
           Following: 0,
           Posts: 0,
+          profilePhotoURL: auth.currentUser.photoURL,
+          id: id,
         });
+        setUserID(id);
+        setPosts(0);
+        setLoggedIn(true);
+      } else {
+        setUserID(profileData.id);
+        setPosts(profileData.Posts);
+        setLoggedIn(true);
       }
-      setUserID(profileData.id);
-      setPosts(profileData.Posts);
-      setLoggedIn(true);
     } catch (err) {
       console.error(err);
     }
@@ -73,6 +88,10 @@ const App = () => {
               />
             }
           />
+          <Route
+            path="/userprofile"
+            element={<UserProfile clickedEmail={clickedEmail} />}
+          />
           <Route path="/profile" element={<Profile loggedIn={loggedIn} />} />
           <Route
             path="/"
@@ -81,6 +100,7 @@ const App = () => {
                 loggedIn={loggedIn}
                 signInWithGoogle={signInWithGoogle}
                 logOut={logOut}
+                setClickedEmail={setClickedEmail}
               />
             }
           />

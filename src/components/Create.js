@@ -22,7 +22,7 @@ const Create = ({ loggedIn, userID, posts, setPosts }) => {
   };
 
   const updatePostsQuantity = async (userID) => {
-    const userDoc = doc(db, "users", userID);
+    const userDoc = await doc(db, "users", userID);
     await updateDoc(userDoc, { Posts: posts + 1 });
     setPosts(posts + 1);
   };
