@@ -54,7 +54,7 @@ const Post = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-10">
+    <div className="mt-4 flex flex-col items-center gap-10">
       {imageList.map((info, index) => (
         <PostInfo key={index} email={info.email} url={info.url} />
       ))}
