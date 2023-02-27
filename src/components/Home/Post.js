@@ -2,14 +2,13 @@ import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { storage, db } from "../firebase/config";
 import { getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { async } from "@firebase/util";
 
-const PostInfo = ({ url }) => {
+const PostInfo = ({ email, url }) => {
   return (
-    <div className="h-fit w-full bg-blue-500">
-      <div className="">ProfileInfo</div>
-      <div className="flex h-[500px] justify-center text-white">
-        <img className="h-[500px]" src={url} alt="Post" />
+    <div className="flex h-[600px] w-[95%] flex-col items-center rounded-lg bg-amber-200">
+      <div className="cursor-pointer p-2 text-[20px]">{email}</div>
+      <div className="flex h-[90%] w-[70%] flex-col items-center justify-center p-1 text-white">
+        <img className="h-auto w-[90%] rounded-lg" src={url} alt="Post" />
       </div>
     </div>
   );
@@ -44,7 +43,7 @@ const Post = () => {
         listAll(imageListRef).then((response) => {
           response.items.forEach((item) => {
             getDownloadURL(item).then((url) => {
-              setImageList((prev) => [...prev, url]);
+              setImageList((prev) => [...prev, { email, url }]);
             });
           });
         });
@@ -56,8 +55,8 @@ const Post = () => {
 
   return (
     <div className="flex flex-col items-center gap-10">
-      {imageList.map((url, index) => (
-        <PostInfo key={index} url={url} />
+      {imageList.map((info, index) => (
+        <PostInfo key={index} email={info.email} url={info.url} />
       ))}
     </div>
   );

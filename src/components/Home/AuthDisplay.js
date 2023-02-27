@@ -3,7 +3,7 @@ import { auth } from "../firebase/config";
 //Display if not logged in
 const NotLoggedIn = ({ signInWithGoogle }) => {
   return (
-    <div className="mt-4 hidden rounded-lg bg-amber-200 p-2 md:block">
+    <div className="mt-4 hidden rounded-lg bg-amber-200 p-2 md:flex">
       <div
         className="flex cursor-pointer items-center rounded-lg  p-2 text-[24px] hover:bg-amber-300"
         onClick={signInWithGoogle}
@@ -40,7 +40,7 @@ const LoggedIn = ({ logOut }) => {
   );
 };
 
-const AuthDisplay = ({ loggedIn, setLoggedIn, signInWithGoogle, logOut }) => {
+const AuthDisplay = ({ loggedIn, signInWithGoogle, logOut }) => {
   return (
     <div>
       {loggedIn ? (
