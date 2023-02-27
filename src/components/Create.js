@@ -52,8 +52,8 @@ const Create = ({ loggedIn, userID, posts, setPosts }) => {
             className="rounded-lg bg-amber-300 py-2 px-4 hover:bg-amber-400"
             id={userID}
             onClick={() => {
-              uploadImage();
               updatePostsQuantity(userID);
+              uploadImage();
             }}
           >
             Upload
